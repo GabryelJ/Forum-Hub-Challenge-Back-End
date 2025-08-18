@@ -6,14 +6,18 @@ import dev.forumhub.model.topico.dto.entrada.DadosTopicoCadastro;
 import dev.forumhub.model.topico.dto.saida.DadosTopicoDetalhamento;
 import dev.forumhub.repository.TopicoRepository;
 import dev.forumhub.service.topico.entradadedados.TopicoService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -51,5 +55,17 @@ public class TopicoController {
         Topico topico = service.atualizar(id, dados);
 
         return ResponseEntity.ok(new DadosTopicoDetalhamento(topico));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity remover(@PathVariable Long id) {
+        Optional<Topico> topico = repository.findById(id);
+        if (topico.isPresent()){
+            repository.deleteById(id);
+        }else{
+            throw new EntityNotFoundException("Não existe tópico com este id.");
+        }
+        return ResponseEntity.noContent().build();
     }
 }

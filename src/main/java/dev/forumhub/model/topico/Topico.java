@@ -34,6 +34,8 @@ public class Topico {
 
     private String curso;
 
+    private boolean ativo;
+
 
     public Topico(IDadosTopicoEntrada dados) {
         this.titulo = dados.titulo();
