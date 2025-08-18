@@ -1,4 +1,4 @@
-package dev.forumhub.model.topico.dto;
+package dev.forumhub.model.topico.dto.saida;
 
 import dev.forumhub.model.topico.Topico;
 import dev.forumhub.model.topico.status.Status;

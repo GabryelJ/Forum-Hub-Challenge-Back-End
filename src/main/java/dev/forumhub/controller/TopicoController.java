@@ -1,10 +1,11 @@
 package dev.forumhub.controller;
 
 import dev.forumhub.model.topico.Topico;
-import dev.forumhub.model.topico.dto.DadosTopicoCadastro;
-import dev.forumhub.model.topico.dto.DadosTopicoDetalhamento;
+import dev.forumhub.model.topico.dto.entrada.DadosTopicoAtualizacao;
+import dev.forumhub.model.topico.dto.entrada.DadosTopicoCadastro;
+import dev.forumhub.model.topico.dto.saida.DadosTopicoDetalhamento;
 import dev.forumhub.repository.TopicoRepository;
-import dev.forumhub.service.topico.cadastro.TopicoService;
+import dev.forumhub.service.topico.entradadedados.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,13 @@ public class TopicoController {
     @GetMapping("/{id}")
     public ResponseEntity<DadosTopicoDetalhamento> detalhar(@PathVariable("id") Long id) {
         Topico topico = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DadosTopicoDetalhamento(topico));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DadosTopicoDetalhamento> atualizar(@PathVariable("id") Long id, @RequestBody @Valid DadosTopicoAtualizacao dados) {
+        Topico topico = service.atualizar(id, dados);
 
         return ResponseEntity.ok(new DadosTopicoDetalhamento(topico));
     }
