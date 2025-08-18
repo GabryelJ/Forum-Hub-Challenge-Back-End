@@ -7,13 +7,12 @@ import dev.forumhub.repository.TopicoRepository;
 import dev.forumhub.service.topico.cadastro.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
@@ -34,9 +33,9 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosTopicoDetalhamento>> listar(@PageableDefault(size=10, sort = {"nome"}) Pageable pageable){
-
-        return null;
+    public ResponseEntity<Page<DadosTopicoDetalhamento>> listar(@PageableDefault(size=10, sort = {"dataCriacao"}) Pageable pageable){
+        var page = repository.findAll(pageable).map(DadosTopicoDetalhamento::new);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
