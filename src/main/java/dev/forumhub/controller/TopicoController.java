@@ -39,7 +39,7 @@ public class TopicoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosTopicoDetalhamento> detalhar(@PathVariable Long id) {
+    public ResponseEntity<DadosTopicoDetalhamento> detalhar(@PathVariable("id") Long id) {
         Topico topico = repository.getReferenceById(id);
 
         return ResponseEntity.ok(new DadosTopicoDetalhamento(topico));
