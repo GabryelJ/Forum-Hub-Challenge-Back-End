@@ -26,6 +26,7 @@ public class Topico {
 
     private LocalDateTime dataCriacao;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private String usuario;
