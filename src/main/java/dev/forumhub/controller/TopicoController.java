@@ -6,6 +6,7 @@ import dev.forumhub.model.topico.dto.entrada.DadosTopicoCadastro;
 import dev.forumhub.model.topico.dto.saida.DadosTopicoDetalhamento;
 import dev.forumhub.repository.TopicoRepository;
 import dev.forumhub.service.topico.entradadedados.TopicoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
