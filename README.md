@@ -91,7 +91,7 @@ A documentação interativa completa da API está disponível no [Swagger UI](ht
 
     - Crie um banco de dados MySQL chamado `forumhub`.
     - Adicione as variáveis de ambiente com suas credenciais do banco de dados e a sua chave secreta para o JWT.
-    - Você pode criar um arquivo `.env` para gerenciar essas variáveis (ex.: `DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `JWT_SECRET`).
+      - (`DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `JWT_SECRET`).
 
 3.  **Execute a aplicação:**
 
